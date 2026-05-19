@@ -73,6 +73,7 @@ pub fn fund(
 /// Admin approves a farmer for an escrow, transitioning to VoucherMinted state.
 pub fn approve_farmer(
     env: &Env,
+    admin: &Address,
     escrow_id: BytesN<32>,
     farmer: Address,
 ) -> Result<(), Error> {
@@ -89,8 +90,8 @@ pub fn approve_farmer(
     record.farmer = Some(farmer.clone());
     record.state = EscrowState::VoucherMinted;
 
-    // Mint voucher tokens to farmer
-    voucher::mint_voucher(env, &farmer, record.amount);
+    // Mint voucher tokens to farmer — admin auth enforced inside mint_voucher
+    voucher::mint_voucher(env, admin, &farmer, record.amount);
 
     env.storage().persistent().set(&DataKey::Escrow(escrow_id.clone()), &record);
     events::farmer_approved(env, &escrow_id, &farmer);
@@ -107,6 +108,9 @@ pub fn redeem_voucher(
     vendor: Address,
 ) -> Result<(), Error> {
     vendor.require_auth();
+
+    // Enforce vendor role via RBAC before any state change
+    crate::rbac::RBAC::require_vendor(env, &vendor)?;
 
     let mut record: EscrowRecord = env
         .storage()

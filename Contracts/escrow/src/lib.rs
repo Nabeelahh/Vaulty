@@ -108,12 +108,12 @@ impl EscrowContract {
         farmer: Address,
     ) -> Result<(), Error> {
         rbac::RBAC::require_not_paused(&env)?;
-        require_admin_auth(&env)?;
+        let admin = require_admin_auth(&env)?;
         env.storage()
             .persistent()
             .set(&DataKey::UserRole(farmer.clone()), &Role::Farmer);
         events::role_assigned(&env, &farmer, &Role::Farmer);
-        escrow::approve_farmer(&env, escrow_id, farmer)
+        escrow::approve_farmer(&env, &admin, escrow_id, farmer)
     }
 
     /// Vendor burns voucher and receives USDC.
