@@ -107,6 +107,8 @@ pub enum DataKey {
     ContractAbi(BytesN<32>),
     /// ABI version counter per contract
     AbiVersion(BytesN<32>),
+    /// Tracks whether a voucher for an escrow has been consumed (double-redeem guard)
+    VoucherConsumed(BytesN<32>),
 }
 
 pub const APPROVAL_TIMEOUT_LEDGERS: u32 = 100_800;   // ~7 days at 6s/ledger

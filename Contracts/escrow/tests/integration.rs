@@ -289,8 +289,101 @@ fn test_abi_validate_matching_schema() {
 }
 
 // ---------------------------------------------------------------------------
-// Repayment streaming tests
+// Security tests (Issue #32 — Voucher Token Security)
 // ---------------------------------------------------------------------------
+
+/// Non-admin cannot trigger voucher minting (approve_farmer is admin-gated).
+#[test]
+#[should_panic]
+fn test_unauthorized_mint_rejected() {
+    let env = create_env();
+    // Do NOT mock_all_auths — we want real auth enforcement
+    let (usdc_id, client, _admin, _oracle) = setup(&env);
+
+    let sender = Address::generate(&env);
+    let farmer = Address::generate(&env);
+    let vendor_id: BytesN<32> = BytesN::from_array(&env, &[20u8; 32]);
+    let amount: i128 = 100_000_000;
+
+    let usdc_client = soroban_sdk::token::StellarAssetClient::new(&env, &usdc_id);
+    // Mint USDC to sender and mock only sender's auth for fund()
+    env.mock_auths(&[soroban_sdk::testutils::MockAuth {
+        address: &sender,
+        invoke: &soroban_sdk::testutils::MockAuthInvoke {
+            contract: &client.address,
+            fn_name: "fund",
+            args: soroban_sdk::vec![
+                &env,
+                usdc_id.clone().into(),
+                sender.clone().into(),
+                vendor_id.clone().into(),
+                Symbol::new(&env, "2025X").into(),
+                amount.into(),
+            ],
+            sub_invokes: &[],
+        },
+    }]);
+    usdc_client.mint(&sender, &amount);
+    let escrow_id = client.fund(&usdc_id, &sender, &vendor_id, &Symbol::new(&env, "2025X"), &amount);
+
+    // Attempt approve_farmer without admin auth — should panic
+    client.approve_farmer(&escrow_id, &farmer);
+}
+
+/// A non-vendor address cannot redeem a voucher.
+#[test]
+#[should_panic]
+fn test_unauthorized_redeem_rejected() {
+    let env = create_env();
+    env.mock_all_auths();
+
+    let (usdc_id, client, _admin, _oracle) = setup(&env);
+
+    let sender = Address::generate(&env);
+    let farmer = Address::generate(&env);
+    let non_vendor = Address::generate(&env); // never registered as vendor
+    let vendor_id: BytesN<32> = BytesN::from_array(&env, &[21u8; 32]);
+    let amount: i128 = 100_000_000;
+
+    let usdc_client = soroban_sdk::token::StellarAssetClient::new(&env, &usdc_id);
+    usdc_client.mint(&sender, &amount);
+
+    let escrow_id = client.fund(&usdc_id, &sender, &vendor_id, &Symbol::new(&env, "2025Y"), &amount);
+    client.approve_farmer(&escrow_id, &farmer);
+
+    // non_vendor has no Vendor role and is not in the approved-address list
+    client.redeem_voucher(&usdc_id, &escrow_id, &non_vendor);
+}
+
+/// A voucher cannot be redeemed twice (double-redeem protection).
+#[test]
+#[should_panic]
+fn test_double_redeem_rejected() {
+    let env = create_env();
+    env.mock_all_auths();
+
+    let (usdc_id, client, _admin, _oracle) = setup(&env);
+
+    let sender = Address::generate(&env);
+    let farmer = Address::generate(&env);
+    let vendor = Address::generate(&env);
+    let vendor_id: BytesN<32> = BytesN::from_array(&env, &[22u8; 32]);
+    let amount: i128 = 100_000_000;
+
+    let usdc_client = soroban_sdk::token::StellarAssetClient::new(&env, &usdc_id);
+    usdc_client.mint(&sender, &amount);
+
+    client.approve_vendor_address(&vendor);
+
+    let escrow_id = client.fund(&usdc_id, &sender, &vendor_id, &Symbol::new(&env, "2025Z"), &amount);
+    client.approve_farmer(&escrow_id, &farmer);
+
+    // First redemption — succeeds
+    client.redeem_voucher(&usdc_id, &escrow_id, &vendor);
+
+    // Second redemption — must panic (VoucherConsumed flag set)
+    client.redeem_voucher(&usdc_id, &escrow_id, &vendor);
+}
 
 #[test]
 fn test_trigger_repay_sets_deadline() {
