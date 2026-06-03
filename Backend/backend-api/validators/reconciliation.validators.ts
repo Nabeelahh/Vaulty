@@ -1,5 +1,5 @@
 import { body } from 'express-validator';
-
+//validation file
 export const reconciliationValidators = {
   create: [
     body('mobile_money_payment_id')
