@@ -69,6 +69,8 @@ const asyncHandler =
   };
 
 // ─── Routes ──────────────────────────────────────────────────────────────────
+// Mock data for users file
+const users: any[] = [];
 
 /**
  * GET /api/users

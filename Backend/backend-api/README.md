@@ -122,3 +122,7 @@ src/
 ## License
 
 MIT
+
+## Note
+
+Documentation touch-up: added a small maintenance note.
