@@ -1,35 +1,51 @@
-# v0-remitroot-frontend
+# Vaulty Frontend
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
+Financial management platform on the Stellar network.
 
-## Built with v0
+## Tech Stack
 
-This repository is linked to a [v0](https://v0.app) project. You can continue developing by visiting the link below -- start new chats to make changes, and v0 will push commits directly to this repo. Every merge to `main` will automatically deploy.
-
-[Continue working on v0 →](https://v0.app/chat/projects/prj_ixXhM3khmqH6omcliVzTXETDLxVL)
+- React 18+
+- TypeScript
+- Vite
+- Tailwind CSS
 
 ## Getting Started
 
-First, run the development server:
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Build for Production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-## Learn More
+### Preview Production Build
 
-To learn more, take a look at the following resources:
+```bash
+npm run preview
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
+## Project Structure
 
-<a href="https://v0.app/chat/api/kiro/clone/shamoo53/v0-remitroot-frontend" alt="Open in Kiro"><img src="https://pdgvvgmkdvyeydso.public.blob.vercel-storage.com/open%20in%20kiro.svg?sanitize=true" /></a>
+```
+src/
+├── assets/      # Static assets
+├── styles/      # Global styles and Tailwind
+├── App.tsx      # Main application component
+├── main.tsx     # Application entry point
+└── vite-env.d.ts # TypeScript declarations
+```
+
+## Development
+
+This is a minimal setup with React and Tailwind CSS. Additional features and components can be added as needed.
