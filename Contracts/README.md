@@ -1,468 +1,358 @@
-# Smart Contracts 🔗
+# Vaulty Smart Contracts
 
-> **Soroban smart contracts for RemitRoot** — the trustless heart of cross-border farm input financing on Stellar.
+The Vaulty smart contracts power the decentralized financial infrastructure of the platform. Built with **Soroban** on the **Stellar Network**, these contracts securely manage savings vaults, deposits, lending, borrowing, rewards, and user interactions in a transparent and trustless manner.
 
----
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Contract Architecture](#contract-architecture)
-- [Core Contract](#core-contract)
-- [State Machine](#state-machine)
-- [Key Functions](#key-functions)
-- [Tech Stack](#tech-stack)
-- [Setup](#setup)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Environment Variables](#environment-variables)
-  - [Building](#building)
-  - [Testing](#testing)
-- [Deployment](#deployment)
-- [Security Considerations](#security-considerations)
-- [Gas Optimization](#gas-optimization)
-- [Audit Checklist](#audit-checklist)
+Each contract is designed to be modular, independently deployable, and easily auditable, allowing the protocol to evolve without affecting unrelated components.
 
 ---
 
-## Overview
+# Overview
 
-The smart contracts implement the core escrow logic that enables RemitRoot's trustless financing system. Built with Soroban (Stellar's smart contract platform), these contracts handle:
+The smart contract layer is responsible for:
 
-- Fund locking and release
-- Voucher token minting and burning
-- Repayment processing
-- State management and validation
-- Access control and permissions
-
-All contract state is stored on-chain, ensuring transparency and immutability of the financing process.
+* Creating and managing savings vaults
+* Locking and unlocking assets
+* Processing deposits and withdrawals
+* Tracking savings streaks
+* Managing lending pools
+* Processing collateralized loans
+* Distributing rewards
+* Recording on-chain financial activity
+* Enforcing protocol rules
 
 ---
 
-## Contract Architecture
+# Technology Stack
 
-### 📦 `contracts/escrow`
+| Technology      | Purpose                    |
+| --------------- | -------------------------- |
+| Soroban SDK     | Smart Contract Development |
+| Rust            | Contract Programming       |
+| Stellar Network | Blockchain Infrastructure  |
+| Stellar CLI     | Deployment & Testing       |
+| Cargo           | Dependency Management      |
 
-The core Soroban smart contract written in Rust. This is the trustless heart of RemitRoot.
+---
 
-```
-packages/contracts/escrow/
-├── src/
-│   ├── lib.rs               # Contract entry point
-│   ├── escrow.rs            # Core escrow logic
-│   ├── voucher.rs           # Voucher token mint/burn
-│   ├── repayment.rs         # Repayment stream logic
-│   ├── storage.rs           # Persistent state types
-│   ├── events.rs            # Contract events
-│   ├── access_control.rs    # Permission management
-│   └── errors.rs            # Contract error codes
-├── tests/
-│   ├── integration.rs       # Full flow integration tests
-│   ├── unit_tests.rs        # Individual function tests
-│   └── security_tests.rs    # Security edge cases
+# Folder Structure
+
+```text
+contracts/
+│
+├── vault/
+│   ├── src/
+│   ├── tests/
+│   └── Cargo.toml
+│
+├── streaks/
+│   ├── src/
+│   ├── tests/
+│   └── Cargo.toml
+│
+├── lending/
+│   ├── src/
+│   ├── tests/
+│   └── Cargo.toml
+│
+├── borrowing/
+│   ├── src/
+│   ├── tests/
+│   └── Cargo.toml
+│
+├── rewards/
+│   ├── src/
+│   ├── tests/
+│   └── Cargo.toml
+│
+├── shared/
+│   ├── errors.rs
+│   ├── events.rs
+│   ├── storage.rs
+│   ├── types.rs
+│   └── utils.rs
+│
 ├── scripts/
-│   ├── deploy.ts            # Deployment script
-│   └── interact.ts          # Interaction helpers
-└── Cargo.toml
+│   ├── build.sh
+│   ├── deploy.sh
+│   └── initialize.sh
+│
+├── Cargo.toml
+├── Cargo.lock
+└── README.md
 ```
 
 ---
 
-## State Machine
+# Contracts
 
-The escrow contract follows a strict state machine to ensure proper fund flow:
+## 🔒 Vault Contract
 
-| State | Trigger | Description |
-|---|---|---|
-| `Created` | `fund()` | Sender deposits USDC, escrow created |
-| `Funded` | `approve_farmer()` | Admin approves farmer, escrow locks |
-| `VoucherMinted` | `mint_voucher()` | RVCH token sent to farmer's wallet |
-| `Redeemed` | `redeem_voucher()` | Vendor burns token, goods delivered |
-| `Repaying` | `trigger_repay()` | Oracle signals harvest season |
-| `Closed` | `repay()` / `default()` | Escrow fully settled or timed out |
+Manages user savings vaults.
 
-### State Transitions
+### Responsibilities
 
-```
-fund() ──▶ Funded ──▶ approve_farmer() ──▶ VoucherMinted
-                                                 │
-                                          redeem_voucher()
-                                                 │
-                                            Redeemed
-                                                 │
-                                          trigger_repay()  ◀── oracle
-                                                 │
-                                            Repaying
-                                           ╱         ╲
-                                     repay()       default()
-                                        │               │
-                                     Repaid         Defaulted
+* Create vaults
+* Lock assets
+* Deposit funds
+* Withdraw funds
+* Track balances
+* Enforce lock periods
+* Store vault metadata
+
+---
+
+## 🔥 Streak Contract
+
+Tracks user saving consistency.
+
+### Responsibilities
+
+* Record deposits
+* Calculate streaks
+* Update milestones
+* Reset expired streaks
+* Trigger achievement events
+
+---
+
+## 🤝 Lending Contract
+
+Manages decentralized lending pools.
+
+### Responsibilities
+
+* Supply liquidity
+* Borrow assets
+* Calculate interest
+* Repay loans
+* Manage collateral
+* Update pool balances
+
+---
+
+## 💳 Borrowing Contract
+
+Allows users to borrow against eligible savings vaults.
+
+### Responsibilities
+
+* Verify collateral
+* Calculate borrowing limits
+* Issue loans
+* Process repayments
+* Release collateral
+
+---
+
+## 🏆 Rewards Contract
+
+Handles user incentives.
+
+### Responsibilities
+
+* Award achievements
+* Calculate rewards
+* Track milestones
+* Record financial discipline scores
+* Distribute eligible incentives
+
+---
+
+# Shared Modules
+
+The `shared/` directory contains reusable logic across all contracts.
+
+Includes:
+
+* Custom errors
+* Events
+* Storage helpers
+* Utility functions
+* Shared data types
+
+This avoids duplication and keeps contracts consistent.
+
+---
+
+# Contract Workflow
+
+```text
+User
+ │
+ ▼
+Create Vault
+ │
+ ▼
+Deposit USDT
+ │
+ ▼
+Vault Contract
+ │
+ ├────────► Update Balance
+ │
+ ├────────► Lock Funds
+ │
+ ├────────► Record Deposit
+ │
+ ▼
+Streak Contract
+ │
+ ├────────► Update Saving Streak
+ ├────────► Check Milestones
+ └────────► Emit Events
+ │
+ ▼
+Rewards Contract
+ │
+ └────────► Award Achievements
 ```
 
 ---
 
-## Key Functions
+# Security Principles
 
-### Core Escrow Operations
+Vaulty contracts are designed with security as a priority.
 
-```rust
-// Sender locks funds for a specific farmer + vendor + season
-pub fn fund(env: Env, sender: Address, vendor_id: BytesN<32>,
-            crop_season: Symbol, amount: i128) -> Result<BytesN<32>, Error>
+Key principles include:
 
-// Admin/DAO approves farmer and mints voucher
-pub fn approve_farmer(env: Env, escrow_id: BytesN<32>,
-                      farmer: Address) -> Result<(), Error>
-
-// Vendor calls this to burn voucher and release USDC to themselves
-pub fn redeem_voucher(env: Env, escrow_id: BytesN<32>,
-                      vendor: Address) -> Result<(), Error>
-
-// Oracle triggers repayment window after harvest
-pub fn trigger_repay(env: Env, escrow_id: BytesN<32>) -> Result<(), Error>
-
-// Farmer calls to make a partial repayment
-pub fn repay(env: Env, escrow_id: BytesN<32>,
-             farmer: Address, amount: i128) -> Result<(), Error>
-
-// Cancel and refund if no farmer approved within timeout
-pub fn cancel(env: Env, escrow_id: BytesN<32>) -> Result<(), Error>
-```
-
-### Voucher Token Management
-
-```rust
-// Mint voucher tokens to farmer
-pub fn mint_voucher(env: Env, escrow_id: BytesN<32>,
-                    farmer: Address, amount: i128) -> Result<(), Error>
-
-// Burn voucher tokens (called by vendor during redemption)
-pub fn burn_voucher(env: Env, escrow_id: BytesN<32>,
-                    vendor: Address, amount: i128) -> Result<(), Error>
-
-// Check voucher balance
-pub fn get_voucher_balance(env: Env, account: Address) -> Result<i128, Error>
-```
-
-### Access Control
-
-```rust
-// Set admin address (contract owner only)
-pub fn set_admin(env: Env, new_admin: Address) -> Result<(), Error>
-
-// Set oracle address (admin only)
-pub fn set_oracle(env: Env, new_oracle: Address) -> Result<(), Error>
-
-// Add approved vendor (admin only)
-pub fn approve_vendor(env: Env, vendor: Address) -> Result<(), Error>
-
-// Remove vendor (admin only)
-pub fn remove_vendor(env: Env, vendor: Address) -> Result<(), Error>
-```
+* Explicit authorization checks
+* Input validation
+* Safe arithmetic
+* Deterministic state transitions
+* Event emission for important actions
+* Modular architecture
+* Minimal external dependencies
 
 ---
 
-## Tech Stack
+# Events
 
-| Layer | Technology |
-|---|---|
-| Language | Rust |
-| Platform | Soroban (Stellar Smart Contracts) |
-| Testing | Stellar Soroban SDK Test Framework |
-| Build | Cargo + Soroban CLI |
-| Deployment | Stellar CLI + Stellar Testnet/Mainnet |
-| Verification | Stellar Explorer |
-| Gas Optimization | Soroban Gas Metering |
+Contracts emit events for major protocol actions.
+
+Examples include:
+
+* VaultCreated
+* DepositMade
+* WithdrawalCompleted
+* VaultUnlocked
+* StreakUpdated
+* LoanIssued
+* LoanRepaid
+* RewardGranted
+
+These events improve transparency and simplify frontend integrations.
 
 ---
 
-## Setup
+# Testing
 
-### Prerequisites
+Each contract contains its own test suite.
 
-- **Rust** 1.70+ with `cargo`
-- **Stellar CLI** (`stellar` — includes Soroban CLI)
-- **Rust Wasm target** for contract compilation
+Tests cover:
 
-### Installation
+* Unit testing
+* Integration testing
+* Authorization checks
+* Failure scenarios
+* Edge cases
+* State transitions
+
+Run all tests:
 
 ```bash
-# Navigate to contracts directory
-cd Contracts
-
-# Install the Stellar CLI
-cargo install --locked stellar-cli --features opt
-
-# Install Rust Wasm target for Soroban contract compilation
-rustup target add wasm32-unknown-unknown
-
-# Install contract dependencies
-cargo build
+cargo test
 ```
 
-### Environment Variables
+---
 
-Create a `.env` file in the contracts directory:
+# Building Contracts
 
-```env
-# Stellar network
-STELLAR_NETWORK=testnet
-STELLAR_RPC_URL=https://soroban-testnet.stellar.org
-STELLAR_HORIZON_URL=https://horizon-testnet.stellar.org
-STELLAR_NETWORK_PASSPHRASE="Test SDF Network ; September 2015"
+Compile all contracts:
+
+```bash
+cargo build --release
+```
+
+---
+
+# Formatting
+
+Format source code:
+
+```bash
+cargo fmt
+```
+
+---
+
+# Linting
+
+Run Clippy:
+
+```bash
+cargo clippy
+```
+
+---
 
 # Deployment
-DEPLOYER_SECRET_KEY=your-deployer-secret-key
-DEPLOYER_PUBLIC_KEY=your-deployer-public-key
 
-# Contract configuration
-ADMIN_ADDRESS=your-admin-address
-ORACLE_ADDRESS=your-oracle-address
-APPROVAL_TIMEOUT_LEDGERS=604800  # 7 days in seconds
-```
+Contracts are deployed using the Stellar CLI.
 
-### Building
+Typical deployment workflow:
 
-```bash
-# Build the contract for testing
-cargo build
-
-# Build for deployment (optimized)
-stellar contract build
-
-# Check contract size and gas usage
-stellar contract size
-```
-
-### Testing
-
-```bash
-# Run all tests
-cargo test
-
-# Run specific test
-cargo test test_fund_flow
-
-# Run integration tests
-cargo test --test integration
-
-# Run with gas profiling
-cargo test --features gas-profiling
-```
-
-**Test coverage targets:**
-
-- `fund()` — valid deposit, duplicate escrow rejection
-- `approve_farmer()` — auth check, state transition
-- `redeem_voucher()` — wrong vendor rejection, double-redeem protection
-- `repay()` — partial repayments, overpayment rejection
-- `cancel()` — before/after timeout, refund amount correctness
-- `default()` — oracle-triggered, funds returned to sender
+1. Build contracts.
+2. Deploy to Stellar Testnet.
+3. Initialize contract storage.
+4. Configure protocol parameters.
+5. Verify deployment.
+6. Connect frontend and backend services.
 
 ---
 
-## Deployment
+# Development Guidelines
 
-### Testnet Deployment
+When contributing:
 
-```bash
-# Deploy contract
-stellar contract deploy \
-  --wasm target/wasm32-unknown-unknown/release/remitroot_escrow.wasm \
-  --source your-deployer-key \
-  --network testnet
-
-# Initialize contract (set admin, oracle, etc.)
-stellar contract invoke \
-  --id $CONTRACT_ID \
-  --function initialize \
-  --args admin:$ADMIN_ADDRESS oracle:$ORACLE_ADDRESS \
-  --source your-deployer-key \
-  --network testnet
-
-# Verify contract on Stellar Explorer
-stellar contract info --id $CONTRACT_ID --network testnet
-```
-
-### Mainnet Deployment
-
-```bash
-# Requires a funded mainnet deployer account
-stellar contract deploy \
-  --wasm target/wasm32-unknown-unknown/release/remitroot_escrow.wasm \
-  --source your-mainnet-deployer-key \
-  --network mainnet
-
-# Initialize with production addresses
-stellar contract invoke \
-  --id $MAINNET_CONTRACT_ID \
-  --function initialize \
-  --args admin:$PROD_ADMIN_ADDRESS oracle:$PROD_ORACLE_ADDRESS \
-  --source your-mainnet-deployer-key \
-  --network mainnet
-```
-
-### Contract Verification
-
-```bash
-# Verify source code on Stellar Explorer
-stellar contract verify \
-  --id $CONTRACT_ID \
-  --source-hash $(stellar contract compute-hash --wasm target/wasm32-unknown-unknown/release/remitroot_escrow.wasm) \
-  --network testnet
-```
+* Keep contracts focused on a single responsibility.
+* Reuse shared modules whenever possible.
+* Write tests for all new functionality.
+* Emit events for user-facing actions.
+* Avoid breaking storage layouts without migration plans.
+* Document all public functions.
 
 ---
 
-## Security Considerations
+# Roadmap
 
-### Access Control
+### Phase 1
 
-**Role-Based Permissions:**
-- **Admin**: Can set oracle, approve vendors, modify contract parameters
-- **Oracle**: Can trigger repayment windows
-- **Vendor**: Can redeem vouchers (must be pre-approved)
-- **Sender**: Can fund escrows and receive repayments
-- **Farmer**: Can receive vouchers and make repayments
+* Savings vaults
+* Deposits
+* Withdrawals
+* Time-locked vaults
 
-**Critical Functions Protected:**
-- `initialize()` - Contract setup (admin only)
-- `set_admin()` - Admin transfer (admin only)
-- `set_oracle()` - Oracle management (admin only)
-- `approve_vendor()` - Vendor whitelisting (admin only)
-- `trigger_repay()` - Repayment window (oracle only)
+### Phase 2
 
-### State Validation
+* Saving streaks
+* Rewards
+* Achievement tracking
 
-**Invariant Checks:**
-- Escrow amounts must be positive
-- Voucher amounts cannot exceed funded amounts
-- Repayments cannot exceed total owed
-- State transitions must follow the defined machine
-- Timeouts must be respected
+### Phase 3
 
-**Reentrancy Protection:**
-- All state changes happen before external calls
-- No external dependencies in critical paths
-- Atomic operations where possible
+* Lending pools
+* Borrowing against vaults
+* Interest calculations
 
-### Economic Security
+### Phase 4
 
-**Slashing Conditions:**
-- Oracle misbehavior can be challenged
-- Vendor fraud results in blacklisting
-- Double-spending attempts are prevented by state machine
-
-**Fee Structure:**
-- Protocol fees collected during redemption
-- Oracle fees for repayment processing
-- Gas costs optimized for frequent operations
+* Yield strategies
+* Governance support
+* Multi-asset vaults
+* Cross-protocol integrations
 
 ---
 
-## Gas Optimization
+# Vision
 
-### Storage Optimization
-
-**Efficient Data Structures:**
-- Use `BytesN<32>` for IDs instead of strings
-- Pack related data into structs
-- Use `Symbol` for enums instead of strings
-- Implement lazy loading for large datasets
-
-**Storage Patterns:**
-- Store only essential data on-chain
-- Use events for off-chain indexing
-- Implement data pruning where possible
-
-### Computation Optimization
-
-**Algorithm Efficiency:**
-- Use O(1) lookups with persistent storage
-- Minimize loops and complex calculations
-- Batch operations where possible
-- Cache frequently accessed data
-
-**Gas Metering:**
-- Profile all functions for gas usage
-- Optimize hot paths first
-- Use `env.require_auth()` for cheap access control
-- Implement gas limits for user operations
-
----
-
-## Audit Checklist
-
-### Code Quality
-
-- [ ] All functions have proper error handling
-- [ ] No unchecked arithmetic operations
-- [ ] All external calls are validated
-- [ ] State transitions are atomic
-- [ ] No integer overflows/underflows
-
-### Security
-
-- [ ] Access control is properly implemented
-- [ ] Reentrancy attacks are prevented
-- [ ] Time-dependent operations use block timestamps
-- [ ] Admin functions have proper safeguards
-- [ ] Emergency pause mechanisms exist
-
-### Economic Logic
-
-- [ ] Fund flows match the specification
-- [ ] Fee calculations are correct
-- [ ] Repayment logic handles edge cases
-- [ ] Timeout mechanisms work correctly
-- [ ] No money can be stuck in contracts
-
-### Testing
-
-- [ ] All function paths are tested
-- [ ] Edge cases are covered
-- [ ] Integration tests pass
-- [ ] Gas usage is within limits
-- [ ] Performance benchmarks exist
-
-### Deployment
-
-- [ ] Contract is verified on Explorer
-- [ ] Initialization parameters are correct
-- [ ] Admin keys are securely stored
-- [ ] Monitoring is set up
-- [ ] Upgrade path is documented
-
----
-
-## Error Codes
-
-| Code | Name | Meaning |
-|---|---|---|
-| `1` | `AlreadyFunded` | `fund()` called on an existing escrow |
-| `2` | `NotFunded` | Action requires `Funded` state |
-| `3` | `Unauthorized` | Caller is not the expected party |
-| `4` | `VoucherAlreadyMinted` | Cannot mint twice |
-| `5` | `NotRedeemed` | Cannot trigger repay before redemption |
-| `6` | `RepaymentComplete` | Surplus repayment rejected |
-| `7` | `NotExpired` | Cannot cancel before timeout |
-| `8` | `InvalidAmount` | Amount must be positive |
-| `9` | `InvalidVendor` | Vendor not approved |
-| `10` | `InsufficientBalance` | Not enough funds for operation |
-
----
-
-## Contributing
-
-1. Follow Rust best practices and conventions
-2. Write comprehensive tests for new functions
-3. Document all public interfaces
-4. Consider gas implications of changes
-5. Run security analysis tools
-6. Update this README for architectural changes
-
----
-
-## License
-
-MIT © 2026 RemitRoot Contributors
+The Vaulty smart contracts form the trustless foundation of the platform, enabling users to securely save, grow, lend, borrow, and manage digital assets on Stellar. By keeping the contracts modular, secure, and transparent, Vaulty creates a scalable protocol that can evolve into a comprehensive decentralized wealth platform for users worldwide.
