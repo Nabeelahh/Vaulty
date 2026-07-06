@@ -3,55 +3,38 @@
 > **Save consistently. Grow your wealth. Unlock financial opportunities.**
 
 Vaulty is a non-custodial decentralized savings platform built on the Stellar network that transforms saving money into an engaging and rewarding experience. By combining gamification, automated savings, decentralized finance, and seamless bank integration, Vaulty helps users—especially in emerging markets—develop lasting financial habits while growing their wealth.
-
 Unlike traditional savings applications that simply store money, Vaulty motivates users through streaks, visual progress, achievements, and financial incentives while giving them access to yield generation, lending, borrowing, and investment opportunities—all while funds remain in user-controlled Stellar wallets, never held in a company-controlled account.
 
 ---
 
 # Vision
-
 Our vision is to become the leading decentralized wealth-building platform for emerging markets by making saving simple, rewarding, and accessible to everyone.
-
 We believe that financial discipline should be celebrated and that every consistent saving habit should unlock greater financial opportunities.
 
 ---
 
 # Problem
-
 Millions of people want to save but struggle with consistency.
-
 Traditional savings platforms have several limitations:
-
 * Little or no motivation to continue saving.
 * No visual feedback that encourages positive habits.
 * Limited access to investment opportunities.
 * Difficult onboarding into decentralized finance.
 * Complicated crypto experiences.
-* No seamless bridge between local banking systems and blockchain.
-
-For many users in Africa and other emerging markets, the biggest challenge is not opening a savings account—it is maintaining the discipline to save consistently.
-
+* No seamless bridge between local banking systems and blockchain
 ---
 
 # Why Blockchain, Not Just Another Savings App?
-
 Products like PiggyVest, Cowrywise, and Kuda Safe Lock already offer gamified savings without any crypto complexity. Vaulty isn't competing on UX alone—it's offering what custodial fiat apps structurally can't:
-
 * **Self-custody by default.** Funds sit in the user's own Stellar wallet, locked by a smart contract—not in a company bank account subject to platform insolvency or seizure.
 * **Transparent, on-chain yield.** APY and interest calculations are verifiable on-chain, not a black-box number set by the platform.
 * **Composable finance.** The same locked collateral that backs a savings streak can also back a loan, without leaving the ecosystem or re-onboarding into a separate lending product.
 * **Cross-border by construction.** A vault funded in NGN and later needed in another currency or country doesn't require a new bank relationship—it moves on Stellar rails.
-
-This is the differentiator the platform needs to lead with when talking to reviewers or partners who will otherwise default to "why not just use an existing savings app."
-
 ---
 
 # Solution
-
 Vaulty combines behavioral psychology with decentralized finance.
-
 Users can:
-
 * Deposit directly from their Nigerian bank account.
 * Automatically convert NGN into USDC on Stellar through a licensed anchor partner.
 * Lock funds inside secure, non-custodial savings vaults.
@@ -61,32 +44,20 @@ Users can:
 * Borrow against their savings.
 * Invest in diversified portfolios.
 * Withdraw directly back to their bank account.
-
-Every successful deposit is celebrated with visual feedback, making saving enjoyable instead of repetitive.
-
 ---
 
 # Custody & Compliance Approach
-
 Vaulty is designed around a **non-custodial, licensed-partner** model rather than seeking direct financial licensing itself:
-
 * **Custody:** Funds are held in the user's own Stellar wallet at all times. Savings vaults are Soroban smart contracts that lock the user's assets for a defined period—Vaulty never takes possession of user funds.
 * **Fiat on/off-ramp:** NGN deposits and withdrawals are processed through a licensed Nigerian payment/anchor partner (the same integration pattern used in Payroute), rather than Vaulty holding a money transmission or CBN license directly.
 * **KYC/AML:** Identity verification is required before fiat on-ramp access, handled by the licensed anchor partner under their existing compliance framework, not built or owned by Vaulty.
 * **Yield, lending, and investment products:** Because these features can resemble regulated investment products, they should launch region-by-region with local legal review, starting with jurisdictions where the anchor partner's licensing already covers this activity. This section needs input from Nigerian fintech/securities counsel before any public claims are made about APY or guaranteed returns.
-
-This section exists as a placeholder for real legal review—but including it, even in draft form, signals that compliance was designed in from the start rather than treated as an afterthought.
-
 ---
 
 # Core Features
-
 ## 🔒 Savings Vaults
-
 Users can create multiple savings vaults for different purposes.
-
 Examples:
-
 * Emergency Fund
 * School Fees
 * Rent
@@ -97,52 +68,35 @@ Examples:
 * Investments
 
 Each vault includes:
-
 * Target amount
 * Progress tracking
 * Lock period
 * Current balance
 * Deposit history
 * Maturity date
-
-Funds in a vault remain in the user's Stellar wallet and are locked by a Soroban smart contract for the chosen period—Vaulty has no custody or withdrawal access.
-
 ---
 
 ## 🔥 Saving Streaks
-
 Saving is treated like maintaining a daily habit.
-
 Every successful deposit extends the user's streak.
-
 Examples:
-
 * 7-Day Streak
 * 30-Day Streak
 * 100-Day Streak
 * 365-Day Streak
-
-Missing a scheduled deposit resets the streak unless protected by an earned streak freeze.
-
 ---
 
 ## 💓 Vault Pulse Animation
-
 Every deposit triggers:
-
 * Vault pulse animation
 * Balance growth animation
 * Progress updates
 * Milestone celebrations
 
-These visual cues provide immediate positive reinforcement.
-
 ---
 
 ## 📈 Progress Tracking
-
 Users can monitor:
-
 * Total savings
 * Goal completion percentage
 * Longest streak
@@ -155,66 +109,46 @@ Users can monitor:
 ---
 
 ## 🏦 Nigerian Bank Integration
-
 Users can fund their savings directly from local bank accounts.
-
 Workflow:
-
 1. User initiates a bank transfer.
 2. Licensed anchor partner receives NGN.
 3. NGN is converted into USDC.
 4. USDC is deposited into the user's Stellar wallet.
 5. Funds move into the selected savings vault.
 
-Users never need to manually purchase cryptocurrency. Vaulty does not hold NGN or USDC at any point in this flow—funds pass from the anchor partner directly to the user's wallet.
-
 ---
 
 ## 🔄 Automatic Savings
-
 Users can automate savings based on:
-
 * Daily schedule
 * Weekly schedule
 * Monthly schedule
 * Payday
 * Custom recurring intervals
-
-Automatic deposits maintain saving streaks.
-
 ---
 
 # Financial Features
-
 ## 💰 Yield Vaults
-
 Users can choose vaults that generate returns.
-
 Vault types may include:
-
 * Flexible Vault
 * Fixed Yield Vault
 * Stable Yield Vault
 * Growth Yield Vault
 
 Users can view:
-
 * Estimated APY
 * Historical performance
 * Lock period
 * Risks
 * Earnings
 
-All yield figures are sourced from on-chain contract logic and should be verifiable by the user directly, not just displayed by the app.
-
 ---
 
 ## 🤝 Lending Marketplace
-
 Idle assets can be supplied to a decentralized lending pool.
-
 Benefits include:
-
 * Passive income
 * Transparent earnings
 * On-chain activity
@@ -222,7 +156,6 @@ Benefits include:
 * Collateralized lending
 
 Dashboard includes:
-
 * Active loans
 * Expected returns
 * Loan maturity
@@ -231,11 +164,8 @@ Dashboard includes:
 ---
 
 ## 💳 Borrow Against Savings
-
 Instead of breaking a savings streak, users can borrow using their vault as collateral.
-
 Benefits:
-
 * Maintain long-term savings.
 * Access liquidity when needed.
 * Preserve investment growth.
@@ -244,23 +174,15 @@ Benefits:
 ---
 
 ## 📊 Investment Portfolios
-
 Users can allocate funds into curated portfolios.
-
 Examples:
-
 * Conservative
 * Balanced
 * Growth
-
-This enables gradual wealth creation without requiring advanced trading knowledge. This feature is subject to the regional legal review described above before public launch.
-
 ---
 
 ## 🔁 Compound Earnings
-
 Users may choose to:
-
 * Automatically reinvest earnings.
 * Withdraw interest.
 * Compound returns.
@@ -269,13 +191,10 @@ Users may choose to:
 ---
 
 # Gamification
-
 Saving should feel rewarding.
 
 ## Achievements
-
 Examples:
-
 * First Deposit
 * First Week
 * First Month
@@ -287,23 +206,16 @@ Examples:
 ---
 
 ## Discipline Score
-
 Users receive a score based on:
-
 * Saving consistency
 * Streak length
 * Goal completion
 * Loan repayment history
-* Investment activity
-
-Higher scores unlock additional platform benefits, such as improved borrowing terms or priority access to new vault types.
-
+* Investment activities
 ---
 
-## Milestone Celebrations
-
+## Mililestone Celebrations
 Every achievement includes:
-
 * Confetti
 * Animated vault
 * Progress unlocks
@@ -312,9 +224,7 @@ Every achievement includes:
 ---
 
 ## Savings Calendar
-
 GitHub-style contribution calendar showing:
-
 * Daily deposits
 * Missed days
 * Longest streak
@@ -323,7 +233,6 @@ GitHub-style contribution calendar showing:
 ---
 
 ## Smart Notifications
-
 Examples:
 
 > Keep your 28-day streak alive by saving today.
@@ -335,9 +244,7 @@ Examples:
 ---
 
 # User Flow
-
 ## Registration
-
 * Create account.
 * Create Stellar wallet.
 * Complete identity verification via the anchor partner (required before fiat funding).
@@ -345,9 +252,7 @@ Examples:
 ---
 
 ## Funding
-
 Choose one:
-
 * Nigerian Bank Transfer
 * Existing Stellar Wallet
 * USDC Transfer
@@ -356,7 +261,6 @@ Choose one:
 ---
 
 ## Savings
-
 * Create vault.
 * Set goal.
 * Choose lock period.
@@ -366,9 +270,7 @@ Choose one:
 ---
 
 ## Wealth Growth
-
 Users may:
-
 * Earn yield
 * Lend funds
 * Borrow against savings
@@ -378,9 +280,7 @@ Users may:
 ---
 
 ## Withdrawals
-
 Upon maturity:
-
 * Withdraw USDC
 * Convert to NGN via the anchor partner
 * Send directly to Nigerian bank account
@@ -487,18 +387,10 @@ vaulty/
 └── README.md
 ```
 
-**Notes on structure:**
-
-* `frontend` and `backend` share TypeScript types where practical (e.g., vault and transaction shapes) via a `packages/shared-types` workspace if the API surface grows large enough to justify it—not included above to keep the initial structure lean.
-* `contract` is isolated as a Rust/Cargo workspace since it has a separate toolchain (`soroban-cli`, Rust, WASM target) from the Node-based `frontend`/`backend`.
-* Each contract (vault, streak, yield, lending, borrowing) is a separate crate rather than one monolithic contract, so audits, upgrades, and testing can be scoped per contract—important given the audit gate in Phase 3 of the roadmap below.
-
 ---
 
 # Smart Contracts
-
 Contracts manage:
-
 * Savings vaults
 * Time locks
 * Lending
@@ -510,7 +402,6 @@ Contracts manage:
 ---
 
 # Security
-
 * Multi-signature treasury management for protocol-level (non-user) funds
 * Encrypted user data
 * Secure authentication
@@ -519,14 +410,10 @@ Contracts manage:
 * Continuous monitoring
 * Independent smart contract audit **required before mainnet launch** (see Roadmap, Phase 3)
 
-Smart contracts are unaudited during testnet phases. No mainnet deployment or real-fund custody will occur until an independent audit is complete—consistent with the audit gate used for OverSync.
-
 ---
 
 # Future Roadmap
-
 ## Phase 1 — Testnet
-
 * Savings vaults
 * USDC deposits
 * Saving streaks
@@ -537,7 +424,6 @@ Smart contracts are unaudited during testnet phases. No mainnet deployment or re
 ---
 
 ## Phase 2 — Testnet
-
 * Nigerian bank deposits (via anchor partner, sandbox)
 * Automatic savings
 * Yield vaults
@@ -548,7 +434,6 @@ Smart contracts are unaudited during testnet phases. No mainnet deployment or re
 ---
 
 ## Phase 3 — Pre-Mainnet
-
 * Independent smart contract audit
 * Legal review of lending, borrowing, and investment features by jurisdiction
 * Lending marketplace
@@ -560,7 +445,6 @@ Smart contracts are unaudited during testnet phases. No mainnet deployment or re
 ---
 
 ## Phase 4 — Mainnet & Expansion
-
 * Mainnet launch (post-audit)
 * Multi-country bank support
 * Tokenized real-world assets
@@ -570,16 +454,3 @@ Smart contracts are unaudited during testnet phases. No mainnet deployment or re
 * Global remittances
 
 ---
-
-# Why Stellar?
-
-Stellar provides the speed, low transaction costs, and asset tokenization capabilities needed to build an accessible financial platform for emerging markets.
-
-By combining Stellar's infrastructure with seamless fiat on/off ramps, Vaulty enables users to move between traditional banking and blockchain without requiring deep cryptocurrency knowledge.
-
----
-
-# Mission
-
-Our mission is to help millions of people build sustainable financial habits by making saving engaging, accessible, and rewarding while providing a gateway to decentralized financial services.
-Vaulty is more than a savings application—it is a platform where every deposit strengthens financial discipline, every streak builds confidence, and every saved dollar becomes an opportunity to grow wealth.
