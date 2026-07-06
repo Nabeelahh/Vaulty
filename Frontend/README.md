@@ -48,4 +48,3 @@ src/
 
 ## Development
 
-This is a minimal setup with React and Tailwind CSS. Additional features and components can be added as needed.
