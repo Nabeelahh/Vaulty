@@ -2,89 +2,455 @@
 
 > **Save consistently. Grow your wealth. Unlock financial opportunities.**
 
-Vaulty is a decentralized savings platform on the Stellar network that turns saving into an engaging, rewarding habit. It combines gamification, automated savings, DeFi, and seamless bank integration to help users — especially in emerging markets — build lasting financial discipline while growing their wealth through yield, lending, borrowing, and investing.
+Vaulty is a non-custodial decentralized savings platform built on the Stellar network that transforms saving money into an engaging and rewarding experience. By combining gamification, automated savings, decentralized finance, and seamless bank integration, Vaulty helps users—especially in emerging markets—develop lasting financial habits while growing their wealth.
+Unlike traditional savings applications that simply store money, Vaulty motivates users through streaks, visual progress, achievements, and financial incentives while giving them access to yield generation, lending, borrowing, and investment opportunities—all while funds remain in user-controlled Stellar wallets, never held in a company-controlled account.
 
 ---
 
-## Problem
-
-Millions of people want to save but struggle with consistency. Traditional savings apps offer little motivation, no visual feedback, limited investment access, and clunky, complicated onboarding into DeFi — with no seamless bridge between local banking and blockchain. For many users in Africa and other emerging markets, the challenge isn't opening a savings account; it's *maintaining the discipline* to save.
-
-## Solution
-
-Vaulty pairs behavioral psychology with DeFi. Users fund vaults directly from a Nigerian bank account (auto-converted to USDT on Stellar), lock savings into purpose-built vaults, and build streaks — while earning yield, lending idle assets, borrowing against savings, or investing in curated portfolios. Every deposit gets animated visual feedback, and withdrawals convert back to NGN straight to a bank account.
+# Vision
+Our vision is to become the leading decentralized wealth-building platform for emerging markets by making saving simple, rewarding, and accessible to everyone.
+We believe that financial discipline should be celebrated and that every consistent saving habit should unlock greater financial opportunities.
 
 ---
 
-## Core Features
+# Problem
+Millions of people want to save but struggle with consistency.
+Traditional savings platforms have several limitations:
+* Little or no motivation to continue saving.
+* No visual feedback that encourages positive habits.
+* Limited access to investment opportunities.
+* Difficult onboarding into decentralized finance.
+* Complicated crypto experiences.
+* No seamless bridge between local banking systems and blockchain
+---
 
-- **Savings Vaults** — Purpose-built vaults (Emergency Fund, School Fees, Rent, Vacation, Business Capital, Car, Wedding, Investments, etc.), each tracking target amount, progress, lock period, balance, deposit history, and maturity date.
-- **Saving Streaks** — Deposits build a streak (7/30/100/365-day milestones); missing a scheduled deposit resets it unless protected by an earned streak freeze.
-- **Vault Pulse Animation** — Deposits trigger pulse/growth animations, progress updates, and milestone celebrations for instant positive reinforcement.
-- **Progress Tracking** — Dashboard for total savings, goal completion %, streaks, deposit history, vault performance, and yield/interest earned.
-- **Nigerian Bank Integration** — User initiates a bank transfer → payment partner receives NGN → converts to USDT → deposits into the user's Stellar wallet → moves into the chosen vault. No manual crypto purchase required.
-- **Automatic Savings** — Recurring deposits (daily, weekly, monthly, payday-aligned, or custom) that also maintain streaks.
+# Why Blockchain, Not Just Another Savings App?
+Products like PiggyVest, Cowrywise, and Kuda Safe Lock already offer gamified savings without any crypto complexity. Vaulty isn't competing on UX alone—it's offering what custodial fiat apps structurally can't:
+* **Self-custody by default.** Funds sit in the user's own Stellar wallet, locked by a smart contract—not in a company bank account subject to platform insolvency or seizure.
+* **Transparent, on-chain yield.** APY and interest calculations are verifiable on-chain, not a black-box number set by the platform.
+* **Composable finance.** The same locked collateral that backs a savings streak can also back a loan, without leaving the ecosystem or re-onboarding into a separate lending product.
+* **Cross-border by construction.** A vault funded in NGN and later needed in another currency or country doesn't require a new bank relationship—it moves on Stellar rails.
+---
 
-## Financial Features
+# Solution
+Vaulty combines behavioral psychology with decentralized finance.
+Users can:
+* Deposit directly from their Nigerian bank account.
+* Automatically convert NGN into USDC on Stellar through a licensed anchor partner.
+* Lock funds inside secure, non-custodial savings vaults.
+* Build saving streaks.
+* Earn yield on eligible vaults.
+* Lend idle assets.
+* Borrow against their savings.
+* Invest in diversified portfolios.
+* Withdraw directly back to their bank account.
+---
 
-- **Yield Vaults** — Flexible, Fixed, Stable, and Growth vault types, each showing estimated APY, historical performance, lock period, risk, and earnings.
-- **Lending Marketplace** — Supply idle assets to a collateralized lending pool for passive, transparent, on-chain income with automated repayments. Dashboard shows active loans, expected returns, maturity, and interest earned.
-- **Borrow Against Savings** — Use a vault as collateral instead of breaking a streak, preserving growth and rewards while accessing liquidity.
-- **Investment Portfolios** — Conservative, Balanced, and Growth portfolios for gradual wealth-building without advanced trading knowledge; risk and expected return disclosed for each.
-- **Compound Earnings** — Auto-reinvest, withdraw, compound, or redirect earnings into other vaults.
+# Custody & Compliance Approach
+Vaulty is designed around a **non-custodial, licensed-partner** model rather than seeking direct financial licensing itself:
+* **Custody:** Funds are held in the user's own Stellar wallet at all times. Savings vaults are Soroban smart contracts that lock the user's assets for a defined period—Vaulty never takes possession of user funds.
+* **Fiat on/off-ramp:** NGN deposits and withdrawals are processed through a licensed Nigerian payment/anchor partner (the same integration pattern used in Payroute), rather than Vaulty holding a money transmission or CBN license directly.
+* **KYC/AML:** Identity verification is required before fiat on-ramp access, handled by the licensed anchor partner under their existing compliance framework, not built or owned by Vaulty.
+* **Yield, lending, and investment products:** Because these features can resemble regulated investment products, they should launch region-by-region with local legal review, starting with jurisdictions where the anchor partner's licensing already covers this activity. This section needs input from Nigerian fintech/securities counsel before any public claims are made about APY or guaranteed returns.
+---
 
-## Gamification
+# Core Features
+## 🔒 Savings Vaults
+Users can create multiple savings vaults for different purposes.
+Examples:
+* Emergency Fund
+* School Fees
+* Rent
+* Vacation
+* Business Capital
+* Car Purchase
+* Wedding
+* Investments
 
-- **Achievements** — First Deposit, First Week/Month, 100 Deposits, $100/$1,000 Saved, One Year Streak, etc.
-- **Discipline Score** — Based on saving consistency, streak length, goal completion, loan repayment history, and investment activity; higher scores unlock platform benefits.
-- **Milestone Celebrations** — Confetti, animated vaults, and celebration screens.
-- **Savings Calendar** — GitHub-style contribution calendar showing daily deposits, missed days, and consistency trends.
-- **Smart Notifications** — e.g. *"Keep your 28-day streak alive by saving today"* or *"You're only $15 away from your emergency fund goal."*
+Each vault includes:
+* Target amount
+* Progress tracking
+* Lock period
+* Current balance
+* Deposit history
+* Maturity date
+---
+
+## 🔥 Saving Streaks
+Saving is treated like maintaining a daily habit.
+Every successful deposit extends the user's streak.
+Examples:
+* 7-Day Streak
+* 30-Day Streak
+* 100-Day Streak
+* 365-Day Streak
+---
+
+## 💓 Vault Pulse Animation
+Every deposit triggers:
+* Vault pulse animation
+* Balance growth animation
+* Progress updates
+* Milestone celebrations
 
 ---
 
-## User Flow
-
-1. **Register** — Create account → Stellar wallet → KYC identity verification (required for bank funding and withdrawals, per local regulation).
-2. **Fund** — Nigerian bank transfer, existing Stellar wallet, USDT transfer, or supported crypto wallet.
-3. **Save** — Create a vault, set a goal and lock period, deposit, and build a streak.
-4. **Grow** — Earn yield, lend, borrow against savings, invest, or compound.
-5. **Withdraw** — At maturity, convert USDT to NGN and send to a bank account.
-
----
-
-## Technology Stack
-
-- **Blockchain:** Stellar Network, Soroban Smart Contracts
-- **Backend:** Node.js, TypeScript, PostgreSQL, Redis
-- **Frontend:** Next.js, React, Tailwind CSS
-- **Mobile (future):** Flutter
-- **Infrastructure:** Docker, GitHub Actions, Vercel, cloud hosting
-
-**Smart contracts** manage savings vaults, time locks, lending/borrowing, yield distribution, reward calculations, and streak verification.
-
-## Security & Compliance
-
-Audited smart contracts, multi-signature treasury management, encrypted user data, secure authentication, rate limiting, fraud detection, continuous monitoring, and KYC/AML verification through a licensed identity provider for bank-linked accounts.
+## 📈 Progress Tracking
+Users can monitor:
+* Total savings
+* Goal completion percentage
+* Longest streak
+* Current streak
+* Deposit history
+* Vault performance
+* Yield earned
+* Interest earned
 
 ---
 
-## Roadmap
-
-| Phase | Focus |
-|---|---|
-| **1** | Savings vaults, USDT deposits, streaks, goal tracking, vault animations, Stellar wallet integration |
-| **2** | Nigerian bank deposits, automatic savings, yield vaults, achievements, savings calendar, notifications |
-| **3** | Lending marketplace, borrowing, investment portfolios, compound earnings, Discipline Score enhancements |
-| **4** | Multi-country bank support, tokenized real-world assets, AI financial coach, community savings circles, merchant integrations, global remittances |
+## 🏦 Nigerian Bank Integration
+Users can fund their savings directly from local bank accounts.
+Workflow:
+1. User initiates a bank transfer.
+2. Licensed anchor partner receives NGN.
+3. NGN is converted into USDC.
+4. USDC is deposited into the user's Stellar wallet.
+5. Funds move into the selected savings vault.
 
 ---
 
-## Why Stellar?
+## 🔄 Automatic Savings
+Users can automate savings based on:
+* Daily schedule
+* Weekly schedule
+* Monthly schedule
+* Payday
+* Custom recurring intervals
+---
 
-Stellar's speed, low transaction costs, and asset tokenization make it well-suited to an accessible financial platform for emerging markets — letting users move between traditional banking and blockchain via seamless fiat on/off ramps, without needing deep crypto knowledge.
+# Financial Features
+## 💰 Yield Vaults
+Users can choose vaults that generate returns.
+Vault types may include:
+* Flexible Vault
+* Fixed Yield Vault
+* Stable Yield Vault
+* Growth Yield Vault
 
-## Mission
+Users can view:
+* Estimated APY
+* Historical performance
+* Lock period
+* Risks
+* Earnings
 
-To help millions build sustainable financial habits by making saving engaging, accessible, and rewarding — while opening a gateway to decentralized financial services. Every deposit strengthens discipline; every streak builds confidence; every saved dollar becomes an opportunity to grow wealth
+---
+
+## 🤝 Lending Marketplace
+Idle assets can be supplied to a decentralized lending pool.
+Benefits include:
+* Passive income
+* Transparent earnings
+* On-chain activity
+* Automated repayments
+* Collateralized lending
+
+Dashboard includes:
+* Active loans
+* Expected returns
+* Loan maturity
+* Interest earned
+
+---
+
+## 💳 Borrow Against Savings
+Instead of breaking a savings streak, users can borrow using their vault as collateral.
+Benefits:
+* Maintain long-term savings.
+* Access liquidity when needed.
+* Preserve investment growth.
+* Continue earning rewards.
+
+---
+
+## 📊 Investment Portfolios
+Users can allocate funds into curated portfolios.
+Examples:
+* Conservative
+* Balanced
+* Growth
+---
+
+## 🔁 Compound Earnings
+Users may choose to:
+* Automatically reinvest earnings.
+* Withdraw interest.
+* Compound returns.
+* Reinvest into additional vaults.
+
+---
+
+# Gamification
+Saving should feel rewarding.
+
+## Achievements
+Examples:
+* First Deposit
+* First Week
+* First Month
+* 100 Deposits
+* $100 Saved
+* $1,000 Saved
+* One Year Streak
+
+---
+
+## Discipline Score
+Users receive a score based on:
+* Saving consistency
+* Streak length
+* Goal completion
+* Loan repayment history
+* Investment activities
+---
+
+## Mililestone Celebrations
+Every achievement includes:
+* Confetti
+* Animated vault
+* Progress unlocks
+* Celebration screens
+
+---
+
+## Savings Calendar
+GitHub-style contribution calendar showing:
+* Daily deposits
+* Missed days
+* Longest streak
+* Monthly consistency
+
+---
+
+## Smart Notifications
+Examples:
+
+> Keep your 28-day streak alive by saving today.
+
+> You're only $15 away from your emergency fund goal.
+
+> Congratulations! You've reached your first 100-day streak.
+
+---
+
+# User Flow
+## Registration
+* Create account.
+* Create Stellar wallet.
+* Complete identity verification via the anchor partner (required before fiat funding).
+
+---
+
+## Funding
+Choose one:
+* Nigerian Bank Transfer
+* Existing Stellar Wallet
+* USDC Transfer
+* Supported Crypto Wallet
+
+---
+
+## Savings
+* Create vault.
+* Set goal.
+* Choose lock period.
+* Deposit funds.
+* Build streak.
+
+---
+
+## Wealth Growth
+Users may:
+* Earn yield
+* Lend funds
+* Borrow against savings
+* Invest
+* Compound earnings
+
+---
+
+## Withdrawals
+Upon maturity:
+* Withdraw USDC
+* Convert to NGN via the anchor partner
+* Send directly to Nigerian bank account
+
+---
+
+# Technology Stack
+
+## Blockchain
+
+* Stellar Network
+* Soroban Smart Contracts (Rust)
+
+## Backend
+
+* Node.js
+* TypeScript
+* PostgreSQL
+* Redis
+
+## Frontend
+
+* Next.js
+* React
+* Tailwind CSS
+
+## Mobile
+
+* React Native (kept consistent with the mobile stack used across the broader Stellar project portfolio, e.g. FarmExchange)
+
+## Infrastructure
+
+* Docker
+* GitHub Actions
+* Vercel
+* Cloud hosting
+
+---
+
+# Repository Structure
+
+Vaulty is organized as a monorepo with three main workspaces—`frontend`, `backend`, and `contract`—managed with pnpm workspaces (or Turborepo/Nx if build orchestration across packages becomes necessary).
+
+```
+vaulty/
+├── frontend/                      # Next.js + React web app
+│   ├── public/                    # Static assets, icons, images
+│   ├── src/
+│   │   ├── app/                   # Next.js app router pages/layouts
+│   │   ├── components/            # Shared UI components (buttons, cards, modals)
+│   │   ├── features/              # Feature-scoped modules
+│   │   │   ├── vaults/            # Vault creation, list, detail views
+│   │   │   ├── streaks/           # Streak tracker, calendar UI
+│   │   │   ├── lending/           # Lending marketplace UI
+│   │   │   ├── borrowing/         # Borrow-against-savings UI
+│   │   │   ├── investments/       # Portfolio allocation UI
+│   │   │   └── notifications/     # In-app notification center
+│   │   ├── hooks/                 # Shared React hooks (useVault, useWallet, etc.)
+│   │   ├── lib/                   # Stellar SDK/wallet connection, API client
+│   │   ├── stores/                # Client-side state management
+│   │   ├── styles/                # Tailwind config, global styles
+│   │   └── types/                 # Shared frontend TypeScript types
+│   ├── .env.example
+│   ├── next.config.js
+│   ├── tailwind.config.ts
+│   └── package.json
+│
+├── backend/                        # Node.js/TypeScript API
+│   ├── src/
+│   │   ├── modules/
+│   │   │   ├── auth/               # Auth, session, identity verification hooks
+│   │   │   ├── vaults/             # Vault CRUD, lock period logic
+│   │   │   ├── streaks/            # Streak calculation, freeze logic
+│   │   │   ├── lending/            # Lending pool orchestration
+│   │   │   ├── borrowing/          # Collateralized borrowing logic
+│   │   │   ├── investments/        # Portfolio allocation logic
+│   │   │   ├── anchor-integration/ # NGN <-> USDC on/off-ramp via anchor partner
+│   │   │   ├── notifications/      # Push/email/in-app notification dispatch
+│   │   │   └── discipline-score/   # Score calculation engine
+│   │   ├── jobs/                   # Scheduled tasks (auto-deposits, streak checks, yield accrual)
+│   │   ├── database/               # Migrations, seeds, schema
+│   │   ├── config/                 # Environment, app configuration
+│   │   ├── middleware/             # Auth guards, rate limiting, error handling
+│   │   └── utils/                  # Shared backend utilities
+│   ├── .env.example
+│   ├── docker-compose.yml
+│   └── package.json
+│
+├── contract/                       # Soroban smart contracts (Rust)
+│   ├── vault/                      # Vault creation, locking, maturity logic
+│   ├── streak/                     # On-chain streak verification
+│   ├── yield/                      # Yield distribution logic
+│   ├── lending/                    # Lending pool contract
+│   ├── borrowing/                  # Collateralized borrowing contract
+│   ├── shared/                     # Common types, errors, utilities across contracts
+│   ├── tests/                      # Contract unit and integration tests
+│   ├── Cargo.toml                  # Workspace manifest
+│   └── Makefile                    # Build, test, and deploy scripts
+│
+├── docs/                           # Architecture notes, compliance drafts, API specs
+├── .github/workflows/              # CI/CD pipelines (lint, test, build, deploy)
+├── pnpm-workspace.yaml             # Monorepo workspace definition
+├── .gitignore
+└── README.md
+```
+
+---
+
+# Smart Contracts
+Contracts manage:
+* Savings vaults
+* Time locks
+* Lending
+* Yield distribution
+* Reward calculations
+* Borrowing
+* Streak verification
+
+---
+
+# Security
+* Multi-signature treasury management for protocol-level (non-user) funds
+* Encrypted user data
+* Secure authentication
+* Rate limiting
+* Fraud detection
+* Continuous monitoring
+* Independent smart contract audit **required before mainnet launch** (see Roadmap, Phase 3)
+
+---
+
+# Future Roadmap
+## Phase 1 — Testnet
+* Savings vaults
+* USDC deposits
+* Saving streaks
+* Goal tracking
+* Vault animations
+* Stellar wallet integration
+
+---
+
+## Phase 2 — Testnet
+* Nigerian bank deposits (via anchor partner, sandbox)
+* Automatic savings
+* Yield vaults
+* Achievement system
+* Savings calendar
+* Notifications
+
+---
+
+## Phase 3 — Pre-Mainnet
+* Independent smart contract audit
+* Legal review of lending, borrowing, and investment features by jurisdiction
+* Lending marketplace
+* Borrow against savings
+* Investment portfolios
+* Compound earnings
+* Discipline Score system
+
+---
+
+## Phase 4 — Mainnet & Expansion
+* Mainnet launch (post-audit)
+* Multi-country bank support
+* Tokenized real-world assets
+* AI financial coach
+* Community savings circles
+* Merchant integrations
+* Global remittances
+
 ---
