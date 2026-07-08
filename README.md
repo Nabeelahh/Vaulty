@@ -454,3 +454,7 @@ Contracts manage:
 * Global remittances
 
 ---
+
+# Mission
+Our mission is to help millions of people build sustainable financial habits by making saving engaging, accessible, and rewarding while providing a gateway to decentralized financial services.
+Vaulty is more than a savings application—it is a platform where every deposit strengthens financial discipline, every streak builds confidence, and every saved dollar becomes an opportunity to grow wealth.
