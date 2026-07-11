@@ -1,12 +1,15 @@
-use soroban_sdk::Address;
+use soroban_sdk::{contracttype, Address};
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[contracttype]
 pub struct VaultId(pub u64);
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[contracttype]
 pub struct Amount(pub i128);
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[contracttype]
 pub enum LockPeriod {
     ThirtyDays,
     NinetyDays,
@@ -15,6 +18,7 @@ pub enum LockPeriod {
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
+#[contracttype]
 pub struct Vault {
     pub owner: Address,
     pub balance: Amount,
@@ -24,6 +28,7 @@ pub struct Vault {
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
+#[contracttype]
 pub struct UserProfile {
     pub address: Address,
     pub total_vaults: u64,
@@ -34,6 +39,7 @@ pub struct UserProfile {
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[contracttype]
 pub struct DisciplineScore {
     pub score: u32,
     pub last_updated: u64,
