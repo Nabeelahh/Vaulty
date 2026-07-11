@@ -1,0 +1,8 @@
+[package]
+name = "vault"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+soroban-sdk.workspace = true
+shared = { path = "../shared" }

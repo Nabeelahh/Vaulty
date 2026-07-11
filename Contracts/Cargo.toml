@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "shared",
+    "vault",
 ]
 resolver = "2"
 
