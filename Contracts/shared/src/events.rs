@@ -16,7 +16,7 @@ impl VaultCreated {
             lock_period,
         };
         env.events()
-            .publish((Symbol::short("vault_created"), event.vault_id.0), (event.owner, event.lock_period));
+            .publish((Symbol::new(&env, "vault_created"), event.vault_id.0), (event.owner, event.lock_period));
     }
 }
 
@@ -34,7 +34,7 @@ impl DepositMade {
             depositor,
         };
         env.events()
-            .publish((Symbol::short("deposit_made"), event.vault_id.0), (event.amount.0, event.depositor));
+            .publish((Symbol::new(&env, "deposit_made"), event.vault_id.0), (event.amount.0, event.depositor));
     }
 }
 
@@ -52,7 +52,7 @@ impl WithdrawalCompleted {
             withdrawer,
         };
         env.events()
-            .publish((Symbol::short("withdrawal_completed"), event.vault_id.0), (event.amount.0, event.withdrawer));
+            .publish((Symbol::new(&env, "withdrawal_completed"), event.vault_id.0), (event.amount.0, event.withdrawer));
     }
 }
 
@@ -65,7 +65,7 @@ impl VaultUnlocked {
     pub fn publish(env: &Env, vault_id: VaultId, unlocked_at: u64) {
         let event = VaultUnlocked { vault_id, unlocked_at };
         env.events()
-            .publish((Symbol::short("vault_unlocked"), event.vault_id.0), event.unlocked_at);
+            .publish((Symbol::new(&env, "vault_unlocked"), event.vault_id.0), event.unlocked_at);
     }
 }
 
@@ -83,7 +83,7 @@ impl StreakUpdated {
             longest_streak,
         };
         env.events()
-            .publish(Symbol::short("streak_updated"), (event.user, event.current_streak, event.longest_streak));
+            .publish((Symbol::new(&env, "streak_updated"),), (event.user, event.current_streak, event.longest_streak));
     }
 }
 
@@ -103,7 +103,7 @@ impl LoanIssued {
             collateral_vault_id,
         };
         env.events()
-            .publish((Symbol::short("loan_issued"), event.loan_id), (event.borrower, event.amount.0, event.collateral_vault_id.0));
+            .publish((Symbol::new(&env, "loan_issued"), event.loan_id), (event.borrower, event.amount.0, event.collateral_vault_id.0));
     }
 }
 
@@ -121,7 +121,7 @@ impl LoanRepaid {
             amount_repaid,
         };
         env.events()
-            .publish((Symbol::short("loan_repaid"), event.loan_id), (event.borrower, event.amount_repaid.0));
+            .publish((Symbol::new(&env, "loan_repaid"), event.loan_id), (event.borrower, event.amount_repaid.0));
     }
 }
 
@@ -139,6 +139,6 @@ impl RewardGranted {
             reason,
         };
         env.events()
-            .publish((Symbol::short("reward_granted"), event.reason), (event.recipient, event.amount.0));
+            .publish((Symbol::new(&env, "reward_granted"), event.reason), (event.recipient, event.amount.0));
     }
 }
