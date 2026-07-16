@@ -8,6 +8,7 @@ import vendorRoutes from "./routes/vendors";
 import ussdRoutes from "./routes/ussd.routes";
 import momoWebhookRoutes from './routes/momoWebhook.routes';
 import { createEscrowRouter } from './routes/escrows.routes';
+import walletRoutes from './routes/wallets';
 import getDb from './db';
 
 
@@ -28,6 +29,7 @@ app.use(logger);
 app.use("/api/users", userRoutes);
 app.use("/api/vendors", vendorRoutes);
 app.use("/api/ussd", ussdRoutes);
+app.use("/api/wallets", walletRoutes);
 
 // Escrow routes require a live DB connection — skip in unit-test mode
 if (process.env.NODE_ENV !== 'test') {
